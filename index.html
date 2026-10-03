@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,28 +8,80 @@
     <style>
         body {
             margin: 0;
-            padding: 0;
-            height: 100vh;
+            padding: 40px 16px;
+            min-height: 100vh;
+            box-sizing: border-box;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             background-color: #ffffff;
+            color: #333;
             font-family: Arial, sans-serif;
         }
         .logo {
-            max-width: 300px;
-            margin-bottom: 20px;
+            max-width: 200px;
+            width: 60%;
+            margin-bottom: 24px;
         }
-        .contact {
-            color: #666;
-            font-size: 18px;
-            text-decoration: none;
+        a {
+            color: #1a8fb8;
+        }
+        .home {
+            font-size: 20px;
+            margin-bottom: 32px;
+        }
+        dl {
+            display: grid;
+            grid-template-columns: max-content minmax(0, 1fr) max-content;
+            gap: 10px 12px;
+            align-items: center;
+            margin: 0 0 24px;
+            font-size: 15px;
+        }
+        dt {
+            color: #888;
+        }
+        dd {
+            margin: 0;
+            user-select: all;
+        }
+        button {
+            font-size: 12px;
+            padding: 2px 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background: #fafafa;
+            cursor: pointer;
+        }
+        .links {
+            font-size: 15px;
         }
     </style>
 </head>
 <body>
     <img src="logo_b.svg" alt="Mazigle Logo" class="logo">
-    <p class="contact">email: ceo@mazigle.ai</p>
+    <a class="home" href="https://mazigle.ai">mazigle.ai</a>
+
+    <dl>
+        <dt>상호</dt><dd>마지글 주식회사 (mazigle)</dd><button>복사</button>
+        <dt>대표자</dt><dd>임동현</dd><button>복사</button>
+        <dt>사업자등록번호</dt><dd>152-87-03240</dd><button>복사</button>
+        <dt>주소</dt><dd>대구광역시 중구 종로 45-4, 2,3F-3F 3073호(종로1가)</dd><button>복사</button>
+        <dt>이메일</dt><dd>ceo@mazigle.ai</dd><button>복사</button>
+    </dl>
+
+    <p class="links"><a href="business.pdf">사업자등록증 (PDF)</a></p>
+
+    <script>
+        // Copy the text of the preceding <dd> when a button is clicked
+        document.querySelectorAll('dl button').forEach(btn => {
+            btn.addEventListener('click', async () => {
+                await navigator.clipboard.writeText(btn.previousElementSibling.textContent);
+                btn.textContent = '복사됨';
+                setTimeout(() => btn.textContent = '복사', 1200);
+            });
+        });
+    </script>
 </body>
 </html>
